@@ -1,0 +1,6 @@
+/node_modules/
+*.log
+flow-typed
+.tern-port
+coverage
+dist
