@@ -2,10 +2,6 @@
   "name": "frontend_l4_chat_project",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
-  "bin": {
-    "hexlet": "dist/bin/hexlet.js"
-  },
   "engines": {
     "node": "9.4"
   },
@@ -25,16 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:hexlet/frontend_l4_chat_project.git"
+    "url": "https://github.com/maximjs/project-lvl4-s211"
   },
-  "author": "Kirill Mokevnin",
+  "author": "Maxim Kozlyakov",
   "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
   "homepage": "",
   "dependencies": {
-    "babel-loader": "8.0.0-beta.0",
     "@babel/cli": "*",
     "@babel/core": "*",
     "@babel/node": "*",
@@ -43,36 +35,37 @@
     "@babel/preset-flow": "*",
     "@babel/preset-react": "*",
     "@babel/preset-stage-0": "*",
+    "axios": "*",
+    "babel-loader": "8.0.0-beta.0",
     "bootstrap": "^4.0.0",
-    "react-bootstrap": "*",
+    "classnames": "*",
     "css-loader": "*",
     "debug": "*",
     "dotenv": "^4.0.0",
+    "faker": "*",
     "jquery": "^3.1.1",
+    "js-cookie": "*",
     "koa": "*",
     "koa-bodyparser": "^4.1.0",
+    "koa-generic-session": "*",
     "koa-logger": "*",
     "koa-pug": "^3.0.0-2",
     "koa-router": "next",
-    "koa-generic-session": "*",
     "koa-static": "^3.0.0",
     "koa-webpack": "^0.3.1",
     "lodash": "*",
-    "classnames": "*",
-    "faker": "*",
-    "js-cookie": "*",
-    "style-loader": "*",
-    "webpack": "*",
     "react": "*",
+    "react-bootstrap": "*",
     "react-dom": "*",
+    "react-redux": "*",
+    "redux": "*",
     "redux-actions": "*",
-    "redux-thunk": "*",
     "redux-bootstrap": "*",
     "redux-form": "*",
-    "axios": "*",
-    "redux": "*",
+    "redux-thunk": "*",
     "socket.io": "*",
-    "react-redux": "*"
+    "style-loader": "*",
+    "webpack": "*"
   },
   "devDependencies": {
     "babel-eslint": "*",
