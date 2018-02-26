@@ -1,13 +1,13 @@
 import React from 'react';
 
 class Channels extends React.Component {
-  state = { ...window.gon.channels };
   render() {
-    const channelList = Object.keys(this.state).map(item =>
-      <li className="list-group-item" key={this.state[item].id}>{this.state[item].name}</li>);
+    const channelsArr = Object.values(this.props.channels);
+    const channels = channelsArr.map(item =>
+      <li key={item.id} className="list-group-item">{item.name}</li>);
     return (
       <ul className="list-group">
-        {channelList}
+        {channels}
       </ul>
     );
   }

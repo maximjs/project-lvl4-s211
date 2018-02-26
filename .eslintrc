@@ -7,13 +7,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "no-console": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    "no-console": 0
   },
   "plugins": [
       "react",

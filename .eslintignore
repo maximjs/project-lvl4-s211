@@ -1,5 +1,4 @@
 node_modules
 dist
 flow-typed
-app/index.js
-app/app.js
+app/components/

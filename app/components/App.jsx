@@ -1,5 +1,5 @@
 import React from 'react';
-import Channels from './components/Channels.jsx';
+import Channels from '../containers/Channels';
 
 class Main extends React.Component {
   render() {

@@ -1,17 +1,14 @@
+import cookies from 'js-cookie';
+import faker from 'faker';
+// import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
-
-import faker from 'faker';
-import gon from 'gon';
-import cookies from 'js-cookie';
-import App from './app';
-import React from 'react';
-import ReactDom from 'react-dom';
-// import io from 'socket.io-client';
+import './index.jsx';
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-ReactDom.render(<App />, document.getElementById('chat'));
-cookies.set('name', faker.name.findName());
+if (!cookies.get('name')) {
+  cookies.set('name', faker.name.findName());
+}
