@@ -1,5 +1,7 @@
 import React from 'react';
 import Channels from '../containers/Channels';
+import Form from '../containers/Form';
+import Messages from '../containers/Messages';
 
 const Main = () =>
   (
@@ -11,23 +13,12 @@ const Main = () =>
       <div className="col-md-9">
         <div className="row">
           <div className="col-md jumbotron">
-            <p>Lorem ipsum doloret yuio ffghgf fdfgfhf tdhhfd hfdhd</p>
+            <Messages />
           </div>
         </div>
         <div className="row">
           <div className="col-md">
-            <form action="">
-              <div className="row">
-                <div className="col-md-1">
-                  <button type="submit" className="btn btn-primary btn-sm">Send</button>
-                </div>
-                <div className="col-md-11">
-                  <div className="form-group">
-                    <input type="text" required value="" className="form-control" placeholder="Write a message" />
-                  </div>
-                </div>
-              </div>
-            </form>
+            <Form />
           </div>
         </div>
       </div>

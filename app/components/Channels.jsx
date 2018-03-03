@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Channels = (props) => {
-  const channels = Object.values(props.channels);
+  const { channels } = props;
   const channelsRender = channels.map(item =>
     <li key={item.id} className="list-group-item">{item.name}</li>);
   return (

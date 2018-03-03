@@ -1,12 +1,9 @@
 import path from 'path';
 import webpack from 'webpack';
-// const path = require('path');
-// const webpack = require('webpack');
 
 export default () => ({
   entry: {
-    app: ['./app'],
-    // vendor: ['./app/vendors'],
+    app: ['babel-polyfill', './app'],
     vendor: ['react', 'react-dom', 'bootstrap/dist/css/bootstrap.min.css'],
   },
   devtool: 'inline-source-map',

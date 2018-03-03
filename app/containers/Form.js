@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
-import Component from '../components/Channels.jsx'; // eslint-disable-line
+import Component from '../components/Form.jsx'; // eslint-disable-line
 
 const mapStateToProps = (state) => {
   const props = {
-    channels: Object.values(state.channels),
+    newMessageText: state.newMessageText,
+    currentChannelId: state.currentChannelId,
   };
   return props;
 };
