@@ -4,9 +4,10 @@ import io from 'socket.io-client';// eslint-disable-line
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import gon from 'gon'; // eslint-disable-line
 import App from './containers/App';
 import reducers from './reducers';
-import { addMessage } from './actions';
+import { addMessage, addChannel, initState } from './actions';
 
 const reactDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();// eslint-disable-line
 
@@ -18,16 +19,24 @@ const store = createStore(
   ),
 );
 
-const socket = io();
-socket.on('connect', () => console.log('connected to server'));
-socket.on('newMessage', (data) => {
-  console.log('newMessage', data);
-  store.dispatch(addMessage(data));
-});
+store.dispatch(initState(gon));
 
-ReactDom.render(
+const socket = io();
+socket
+  .on('connect', () => console.log('connected to server'))
+  .on('disconnect', () => console.log('disconnected from server'))
+  .on('newMessage', (data) => {
+    // console.log('newMessage', data);
+    store.dispatch(addMessage(data));
+  })
+  .on('newChannel', (data) => {
+    // console.log('newChannel', data);
+    store.dispatch(addChannel(data));
+  });
+
+export default userName => ReactDom.render(
   <Provider store={store}>
-    <App />
+    <App userName={userName} />
   </Provider>,
   document.getElementById('chat'),
 );

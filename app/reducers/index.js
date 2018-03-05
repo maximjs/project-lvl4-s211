@@ -1,40 +1,63 @@
 import { handleActions } from 'redux-actions';
 import { combineReducers } from 'redux';
-import gon from 'gon'; // eslint-disable-line
-import _ from 'lodash';
+import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
-const initStateChannels = _.keyBy(gon.channels, 'id');
-
-const newMessageText = handleActions({
-  [actions.updateInputForm](state, { payload: { text } }) {
-    return text;
+const messageCreatingState = handleActions({
+  [actions.updateMessageRequest]() {
+    return 'requested';
   },
   [actions.updateMessageSuccess]() {
-    return '';
+    return 'successed';
   },
-}, '');
+  [actions.updateMessageFailure]() {
+    return 'failed';
+  },
+}, 'none');
+
+const сhannelCreatingState = handleActions({
+  [actions.updateChannelRequest]() {
+    return 'requested';
+  },
+  [actions.updateChannelSuccess]() {
+    return 'successed';
+  },
+  [actions.updateChannelFailure]() {
+    return 'failed';
+  },
+}, 'none');
 
 const messages = handleActions({
+  [actions.initState](state, { payload: gon }) {
+    return gon.messages;
+  },
   [actions.addMessage](state, { payload: { data: { attributes } } }) {
     return [...state, attributes];
   },
-}, gon.messages);
+}, []);
 
 const channels = handleActions({
-  [actions.addChannels](state) {
-    return state;
+  [actions.initState](state, { payload: gon }) {
+    return gon.channels;
   },
-}, initStateChannels);
+  [actions.addChannel](state, { payload: { data: { attributes } } }) {
+    return [...state, attributes];
+  },
+}, []);
 
 const currentChannelId = handleActions({
-  [actions.changeCurrentChannel](state, { payload: channelId }) {
+  [actions.initState](state, { payload: gon }) {
+    return gon.currentChannelId;
+  },
+  [actions.changeCurrentChannel](state, { payload: { channelId } }) {
     return channelId;
   },
-}, gon.currentChannelId);
+}, null);
 
 export default combineReducers({
-  newMessageText,
+  messageCreatingState,
+  сhannelCreatingState,
+  form: formReducer,
   messages,
   channels,
   currentChannelId,

@@ -1,14 +1,23 @@
 import React from 'react';
-import Channels from '../containers/Channels';
-import Form from '../containers/Form';
+import Channels from './Channels.jsx'; // eslint-disable-line
+import AddMessageForm from './AddMessageForm.jsx'; // eslint-disable-line
 import Messages from '../containers/Messages';
+import AddChannelForm from './AddChannelForm.jsx'; // eslint-disable-line
 
-const Main = () =>
+const Main = props =>
   (
     <div className="row">
       <div className="col-md-3">
         <h4>Channels:</h4>
-        <Channels />
+        <AddChannelForm
+          сhannelCreatingState={props.сhannelCreatingState}
+          updateChannels={props.updateChannels}
+        />
+        <Channels
+          currentChannelId={props.currentChannelId}
+          channels={props.channels}
+          changeCurrentChannel={props.changeCurrentChannel}
+        />
       </div>
       <div className="col-md-9">
         <div className="row">
@@ -18,7 +27,12 @@ const Main = () =>
         </div>
         <div className="row">
           <div className="col-md">
-            <Form />
+            <AddMessageForm
+              userName={props.userName}
+              currentChannelId={props.currentChannelId}
+              messageCreatingState={props.messageCreatingState}
+              updateMessage={props.updateMessage}
+            />
           </div>
         </div>
       </div>

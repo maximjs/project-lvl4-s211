@@ -1,19 +1,40 @@
 import { createAction } from 'redux-actions';
 import axios from 'axios';
+import routes from '../routes';
+
+export const initState = createAction('STATE_INITIALIZED');
 
 export const addMessage = createAction('MESSAGE_ADD');
-export const updateInputForm = createAction('INPUTFORM_UPDATE');
 
+export const updateMessageRequest = createAction('MESSAGE_ADD_REQUEST');
 export const updateMessageSuccess = createAction('MESSAGE_ADD_SUCCESS');
+export const updateMessageFailure = createAction('MESSAGE_ADD_FAILURE');
 
-// export const addChannels = createAction('ADD_CHANNELS');
-// export const changeCurrentChannel = createAction('CHANGE_CHANNEL');
+export const updateChannelRequest = createAction('CHANNEL_ADD_REQUEST');
+export const updateChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
+export const updateChannelFailure = createAction('CHANNEL_ADD_FAILURE');
+
+export const addChannel = createAction('ADD_CHANNEL');
+export const changeCurrentChannel = createAction('CHANGE_CHANNEL');
 
 export const updateMessage = (channelId, message) => async (dispatch) => {
+  dispatch(updateMessageRequest());
   try {
-    await axios.post(`/api/v1/channels/${channelId}/messages`, { data: { attributes: message } });
+    await axios.post(routes.postMessage(channelId), { data: { attributes: message } });
     dispatch(updateMessageSuccess());
   } catch (e) {
     console.log(e);
+    dispatch(updateMessageFailure());
+  }
+};
+
+export const updateChannels = name => async (dispatch) => {
+  dispatch(updateChannelRequest());
+  try {
+    await axios.post(routes.postChannel(), { data: { attributes: name } });
+    dispatch(updateChannelSuccess());
+  } catch (e) {
+    console.log(e);
+    dispatch(updateChannelFailure());
   }
 };
