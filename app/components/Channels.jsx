@@ -7,24 +7,38 @@ class Channels extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const { channels } = this.props;
     const channelsRender = channels.map((channel) => {
       const btnClass = classnames({
         btn: true,
         'btn-primary': this.props.currentChannelId === channel.id,
       });
+      // return (
+      //   <li key={channel.id} className="list-group-item">
+      // <button type="button" onClick={this.handleButtonClick(channel.id)} className={btnClass}>{channel.name}</button>
+      //   </li>
+      // );
       return (
-        <li key={channel.id} className="list-group-item">
+        <div key={channel.id} className="btn-group">
           <button type="button" onClick={this.handleButtonClick(channel.id)} className={btnClass}>{channel.name}</button>
-        </li>
+          <button type="button" className="btn dropdown-toggle" data-toggle="dropdown">
+            <span className="caret" />
+          </button>
+          <ul className="dropdown-menu" role="menu">
+            <li><button type="button" className="btn">Remove</button></li>
+            <li><button type="button" className="btn">Rename</button></li>
+          </ul>
+        </div>
       );
     });
 
     return (
-      <ul className="list-group">
+      // <ul className="list-group">
+      //   {channelsRender}
+      // </ul>
+      <div className="btn-group-vertical">
         {channelsRender}
-      </ul>
+      </div>
     );
   }
 }
