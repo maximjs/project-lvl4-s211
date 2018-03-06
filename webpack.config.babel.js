@@ -4,7 +4,7 @@ import webpack from 'webpack';
 export default () => ({
   entry: {
     app: ['babel-polyfill', './app'],
-    vendor: ['react', 'react-dom', 'bootstrap/dist/css/bootstrap.min.css'],
+    vendor: ['react', 'react-dom', 'bootstrap/dist/css/bootstrap.min.css', 'bootstrap'],
   },
   devtool: 'inline-source-map',
   externals: {

@@ -9,13 +9,11 @@ import App from './containers/App';
 import reducers from './reducers';
 import { addMessage, addChannel, initState } from './actions';
 
-const reactDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();// eslint-disable-line
-
 const store = createStore(
   reducers,
   compose(
     applyMiddleware(thunk),
-    reactDevtools,
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f, // eslint-disable-line
   ),
 );
 
