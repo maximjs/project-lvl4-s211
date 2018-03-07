@@ -1,6 +1,5 @@
 import cookies from 'js-cookie';
 import faker from 'faker';
-// import io from 'socket.io-client';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';

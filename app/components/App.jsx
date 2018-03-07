@@ -13,10 +13,13 @@ const Main = props =>
           сhannelCreatingState={props.сhannelCreatingState}
           updateChannels={props.updateChannels}
         />
+        <br />
         <Channels
           currentChannelId={props.currentChannelId}
           channels={props.channels}
           changeCurrentChannel={props.changeCurrentChannel}
+          requestRemoveChannel={props.requestRemoveChannel}
+          requestRenameChannel={props.requestRenameChannel}
         />
       </div>
       <div className="col-md-9">
@@ -25,16 +28,13 @@ const Main = props =>
             <Messages />
           </div>
         </div>
-        <div className="row">
-          <div className="col-md">
-            <AddMessageForm
-              userName={props.userName}
-              currentChannelId={props.currentChannelId}
-              messageCreatingState={props.messageCreatingState}
-              updateMessage={props.updateMessage}
-            />
-          </div>
-        </div>
+        <p>Your name: {props.userName}</p>
+        <AddMessageForm
+          userName={props.userName}
+          currentChannelId={props.currentChannelId}
+          messageCreatingState={props.messageCreatingState}
+          updateMessage={props.updateMessage}
+        />
       </div>
     </div>
   );

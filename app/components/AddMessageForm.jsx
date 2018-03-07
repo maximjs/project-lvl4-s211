@@ -1,3 +1,4 @@
+/* eslint max-len: ["error", { "code": 200 }] */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
@@ -14,14 +15,10 @@ class AddMessageForm extends React.Component {
     const disabled = this.props.messageCreatingState === 'requested';
     return (
       <form action="" onSubmit={this.props.handleSubmit(this.updateMessage)}>
-        <div className="row">
-          <div className="col-md-1">
-            <button disabled={disabled} type="submit" className="btn btn-primary">Send</button>
-          </div>
-          <div className="col-md-11">
-            <div className="form-group">
-              <Field name="text" required component="input" type="text" className="form-control" placeholder="write a message" />
-            </div>
+        <div className="input-group mb-3">
+          <Field name="text" required component="input" type="text" className="form-control" placeholder="write a message" />
+          <div className="input-group-append">
+            <button className="btn btn-outline-primary" disabled={disabled} type="submit">Send</button>
           </div>
         </div>
       </form>

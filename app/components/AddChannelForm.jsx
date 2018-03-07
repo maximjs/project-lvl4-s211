@@ -1,3 +1,4 @@
+/* eslint max-len: ["error", { "code": 200 }] */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
@@ -25,10 +26,12 @@ class AddChannelForm extends React.Component {
   showInputForm() {
     const disabled = this.props.сhannelCreatingState === 'requested';
     return (
-      <form action="" className="form-inline" onSubmit={this.props.handleSubmit(this.updateChannels)}>
-        <button type="submit" disabled={disabled} className="btn btn-primary btn-sm">Add</button>
-        <div className="form-group">
+      <form action="" onSubmit={this.props.handleSubmit(this.updateChannels)}>
+        <div className="input-group mb-3">
           <Field name="text" required component="input" type="text" className="form-control" placeholder="channel name" />
+          <div className="input-group-append">
+            <button className="btn btn-outline-primary btn-sm" disabled={disabled} type="submit">Add</button>
+          </div>
         </div>
       </form>
     );
