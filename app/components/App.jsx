@@ -23,10 +23,8 @@ const Main = props =>
         />
       </div>
       <div className="col-md-9">
-        <div className="row">
-          <div className="col-md jumbotron">
-            <Messages />
-          </div>
+        <div className="jumbotron">
+          <Messages />
         </div>
         <p>Your name: {props.userName}</p>
         <AddMessageForm

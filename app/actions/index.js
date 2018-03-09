@@ -2,7 +2,9 @@ import { createAction } from 'redux-actions';
 import axios from 'axios';
 import routes from '../routes';
 
-export const initState = createAction('STATE_INITIALIZED');
+export const initMessagesState = createAction('MESSAGE_STATE_INITIALIZED');
+export const initChannelsState = createAction('CHANNELS_STATE_INITIALIZED');
+export const initCurrentChannelState = createAction('CURRENT_CHANNEL_STATE_INITIALIZED');
 
 export const addMessage = createAction('MESSAGE_ADD');
 

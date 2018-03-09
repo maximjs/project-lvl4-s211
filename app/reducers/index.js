@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import _ from 'lodash';
 import * as actions from '../actions';
 
 const messageCreatingState = handleActions({
@@ -28,38 +29,39 @@ const сhannelCreatingState = handleActions({
 }, 'none');
 
 const messages = handleActions({
-  [actions.initState](state, { payload: gon }) {
-    return gon.messages;
+  [actions.initMessagesState](state, { payload: messagesState }) {
+    return _.keyBy(messagesState, 'id');
   },
   [actions.addMessage](state, { payload: { data: { attributes } } }) {
-    return [...state, attributes];
+    return { ...state, [attributes.id]: attributes };
   },
   [actions.removeChannel](state, { payload: { data: { id } } }) {
-    return state.filter(m => m.channelId !== id);
+    return _.omit(state, id);
   },
 }, []);
 
 const channels = handleActions({
-  [actions.initState](state, { payload: gon }) {
-    return gon.channels;
+  [actions.initChannelsState](state, { payload: channelsState }) {
+    return _.keyBy(channelsState, 'id');
   },
   [actions.addChannel](state, { payload: { data: { attributes } } }) {
-    return [...state, attributes];
+    return { ...state, [attributes.id]: attributes };
   },
   [actions.removeChannel](state, { payload: { data: { id } } }) {
-    return state.filter(c => c.id !== id);
+    return _.omit(state, id);
   },
   [actions.renameChannel](state, { payload: { data } }) {
-    const channelIndex = state.findIndex(item => item.id === data.id);
-    const newItem = { ...state[channelIndex], name: data.attributes.name };
-    const newState = [...state.slice(0, channelIndex), newItem, ...state.slice(channelIndex + 1)];
-    return newState;
+    const updatedChannel = { ...state[data.id], name: data.attributes.name };
+    // const channelIndex = state.findIndex(item => item.id === data.id);
+    // const newItem = { ...state[channelIndex], name: data.attributes.name };
+    // const newState = [...state.slice(0, channelIndex), newItem, ...state.slice(channelIndex + 1)];
+    return { ...state, [data.id]: updatedChannel };
   },
 }, []);
 
 const currentChannelId = handleActions({
-  [actions.initState](state, { payload: gon }) {
-    return gon.currentChannelId;
+  [actions.initCurrentChannelState](state, { payload: channelId }) {
+    return channelId;
   },
   [actions.changeCurrentChannel](state, { payload: { channelId } }) {
     return channelId;

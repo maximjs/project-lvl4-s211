@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
     currentChannelId: state.currentChannelId,
     messageCreatingState: state.messageCreatingState,
     сhannelCreatingState: state.сhannelCreatingState,
-    channels: state.channels,
+    channels: Object.values(state.channels),
   };
   return props;
 };

@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import gon from 'gon'; // eslint-disable-line
 import App from './containers/App';
 import reducers from './reducers';
-import { addMessage, addChannel, removeChannel, renameChannel, initState } from './actions';
+import * as actions from './actions';
 
 const store = createStore(
   reducers,
@@ -17,23 +17,26 @@ const store = createStore(
   ),
 );
 
-store.dispatch(initState(gon));
+const { messages, channels, currentChannelId } = gon;
+store.dispatch(actions.initMessagesState(messages));
+store.dispatch(actions.initChannelsState(channels));
+store.dispatch(actions.initCurrentChannelState(currentChannelId));
 
 const socket = io();
 socket
   .on('connect', () => console.log('connected to server'))
   .on('disconnect', () => console.log('disconnected from server'))
   .on('newMessage', (data) => {
-    store.dispatch(addMessage(data));
+    store.dispatch(actions.addMessage(data));
   })
   .on('newChannel', (data) => {
-    store.dispatch(addChannel(data));
+    store.dispatch(actions.addChannel(data));
   })
   .on('removeChannel', (data) => {
-    store.dispatch(removeChannel(data));
+    store.dispatch(actions.removeChannel(data));
   })
   .on('renameChannel', (data) => {
-    store.dispatch(renameChannel(data));
+    store.dispatch(actions.renameChannel(data));
   });
 
 export default userName => ReactDom.render(
