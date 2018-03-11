@@ -4,7 +4,7 @@ import webpack from 'webpack';
 export default () => ({
   entry: {
     app: ['babel-polyfill', './app'],
-    vendor: ['react', 'react-dom', 'bootstrap/dist/css/bootstrap.min.css', 'bootstrap', 'jquery'],
+    vendor: ['react', 'react-dom', 'bootstrap/dist/css/bootstrap.min.css', 'bootstrap'],
   },
   devtool: 'inline-source-map',
   externals: {
@@ -32,6 +32,9 @@ export default () => ({
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new webpack.ProvidePlugin({

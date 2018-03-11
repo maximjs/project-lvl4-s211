@@ -1,18 +1,20 @@
 /* eslint max-len: ["error", { "code": 200 }] */
 import React from 'react';
-import $ from 'jquery';
 import { Field, reduxForm } from 'redux-form';
 
 class RenameChannelModal extends React.Component {
+  // state = { modalClass: false };
   renameChannel = (values) => {
     this.props.requestRenameChannel(this.props.currentChannelId, { name: values.text });
     this.props.reset();
-    $(this.modal).modal('hide');
   };
 
+  // close = () => this.setState({ modalClass: 'modal fade' });
+
   render() {
+    // const modalClass = this.state.visible ? 'modal fade in' : 'modal fade';
     return (
-      <div className="modal fade" ref={(modal) => { this.modal = modal; }} id="renameChannelModal" tabIndex="-1" role="dialog" aria-hidden="true">
+      <div className="modal fade" id="renameChannelModal" tabIndex="-1" role="dialog" aria-hidden="true">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">

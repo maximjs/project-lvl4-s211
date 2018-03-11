@@ -3,16 +3,12 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class AddChannelForm extends React.Component {
-  state = { buttonText: 'Add channel', showForm: false };
+  state = { showForm: false };
 
   handleClick = () => {
-    const buttonText = this.state.buttonText === 'Add channel' ? 'Chancel' : 'Add channel';
     const showForm = this.state.showForm === false;
-    this.setState({
-      buttonText,
-      showForm,
-    });
-    if (this.state.buttonText === 'Chancel') {
+    this.setState({ showForm });
+    if (this.state.showForm === false) {
       this.props.reset();
     }
   };
@@ -38,9 +34,10 @@ class AddChannelForm extends React.Component {
   }
 
   render() {
+    const buttonText = this.state.showForm === true ? 'Chancel' : 'Add channel';
     return (
       <div>
-        <button type="button" onClick={this.handleClick} className="btn btn-primary btn-sm">{this.state.buttonText}</button>
+        <button type="button" onClick={this.handleClick} className="btn btn-primary btn-sm">{buttonText}</button>
         {this.state.showForm === true ? this.showInputForm() : null}
       </div>
     );

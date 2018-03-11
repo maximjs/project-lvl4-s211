@@ -38,7 +38,7 @@ const messages = handleActions({
   [actions.removeChannel](state, { payload: { data: { id } } }) {
     return _.omit(state, id);
   },
-}, []);
+}, {});
 
 const channels = handleActions({
   [actions.initChannelsState](state, { payload: channelsState }) {
@@ -52,12 +52,9 @@ const channels = handleActions({
   },
   [actions.renameChannel](state, { payload: { data } }) {
     const updatedChannel = { ...state[data.id], name: data.attributes.name };
-    // const channelIndex = state.findIndex(item => item.id === data.id);
-    // const newItem = { ...state[channelIndex], name: data.attributes.name };
-    // const newState = [...state.slice(0, channelIndex), newItem, ...state.slice(channelIndex + 1)];
     return { ...state, [data.id]: updatedChannel };
   },
-}, []);
+}, {});
 
 const currentChannelId = handleActions({
   [actions.initCurrentChannelState](state, { payload: channelId }) {
@@ -65,6 +62,9 @@ const currentChannelId = handleActions({
   },
   [actions.changeCurrentChannel](state, { payload: { channelId } }) {
     return channelId;
+  },
+  [actions.removeChannel]() {
+    return 1;
   },
 }, null);
 

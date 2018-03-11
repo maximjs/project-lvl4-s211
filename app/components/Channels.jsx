@@ -1,43 +1,29 @@
 /* eslint max-len: ["error", { "code": 200 }] */
 import React from 'react';
 import classnames from 'classnames';
-import RemoveChannelModal from './RemoveChannelModal.jsx'; // eslint-disable-line
-import RenameChannelModal from './RenameChannelModal.jsx'; // eslint-disable-line
+import RemoveChannelModal from './RemoveChannelModal';
+import RenameChannelModal from './RenameChannelModal';
 
 class Channels extends React.Component {
-  state={ clickedChannelId: null, removable: false };
-
   handleChannelClick = id => () => {
     this.props.changeCurrentChannel({ channelId: id });
   };
 
   handleRemoveChannel = () => {
-    const generalChannel = this.props.channels.find(channel => channel.name === 'general');
-    this.props.requestRemoveChannel(this.state.clickedChannelId);
-    this.props.changeCurrentChannel({ channelId: generalChannel.id });
-  };
-
-  handleMenuChannelClick = id => () => {
-    this.props.changeCurrentChannel({ channelId: id });
-    const clickedChannel = this.props.channels.find(channel => channel.id === id);
-    this.setState({
-      clickedChannelId: id,
-      removable: clickedChannel.removable,
-    });
+    this.props.requestRemoveChannel(this.props.currentChannelId);
   };
 
   channelsRender() {
     const { channels } = this.props;
     return channels.map((channel) => {
+      const name = this.props.currentChannelId !== channel.id ? 'btn-light' : 'btn-primary';
       const btnClass = classnames({
         btn: true,
-        'btn-light': this.props.currentChannelId !== channel.id,
-        'btn-primary': this.props.currentChannelId === channel.id,
+        [name]: true,
       });
       const btnDropdownClass = classnames({
         btn: true,
-        'btn-light': this.props.currentChannelId !== channel.id,
-        'btn-primary': this.props.currentChannelId === channel.id,
+        [name]: true,
         'dropdown-toggle': true,
         'dropdown-toggle-split': true,
       });
@@ -48,21 +34,23 @@ class Channels extends React.Component {
             <span className="sr-only" />
           </button>
           <div className="dropdown-menu">
-            <button type="button" onClick={this.handleMenuChannelClick(channel.id)} className="btn dropdown-item" data-toggle="modal" data-target="#removeChannelModal">Remove</button>
-            <button type="button" onClick={this.handleMenuChannelClick(channel.id)} className="btn dropdown-item" data-toggle="modal" data-target="#renameChannelModal">Rename</button>
-          </div >
+            <button type="button" onClick={this.handleChannelClick(channel.id)} className="btn dropdown-item" data-toggle="modal" data-target="#removeChannelModal">Remove</button>
+            <button type="button" onClick={this.handleChannelClick(channel.id)} className="btn dropdown-item" data-toggle="modal" data-target="#renameChannelModal">Rename</button>
+          </div>
         </div>
       );
     });
   }
 
   render() {
+    const { channels, currentChannelId } = this.props;
+    const { removable } = channels.find(channel => channel.id === currentChannelId);
     return (
       <div>
         <div className="btn-group-vertical">
           {this.channelsRender()}
         </div>
-        <RemoveChannelModal removable={this.state.removable} handleRemoveChannel={this.handleRemoveChannel} />
+        <RemoveChannelModal removable={removable} handleRemoveChannel={this.handleRemoveChannel} />
         <RenameChannelModal requestRenameChannel={this.props.requestRenameChannel} currentChannelId={this.props.currentChannelId} />
       </div>
     );

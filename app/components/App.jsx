@@ -1,10 +1,10 @@
 import React from 'react';
-import Channels from './Channels.jsx'; // eslint-disable-line
-import AddMessageForm from './AddMessageForm.jsx'; // eslint-disable-line
+import Channels from '../containers/Channels';
+import AddMessageForm from './AddMessageForm';
 import Messages from '../containers/Messages';
-import AddChannelForm from './AddChannelForm.jsx'; // eslint-disable-line
+import AddChannelForm from './AddChannelForm';
 
-const Main = props =>
+const App = props =>
   (
     <div className="row">
       <div className="col-md-3">
@@ -14,13 +14,7 @@ const Main = props =>
           updateChannels={props.updateChannels}
         />
         <br />
-        <Channels
-          currentChannelId={props.currentChannelId}
-          channels={props.channels}
-          changeCurrentChannel={props.changeCurrentChannel}
-          requestRemoveChannel={props.requestRemoveChannel}
-          requestRenameChannel={props.requestRenameChannel}
-        />
+        <Channels />
       </div>
       <div className="col-md-9">
         <div className="jumbotron">
@@ -37,4 +31,4 @@ const Main = props =>
     </div>
   );
 
-export default Main;
+export default App;

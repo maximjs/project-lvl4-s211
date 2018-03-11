@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Component from '../components/Messages.jsx'; // eslint-disable-line
+import Component from '../components/Messages';
 
 const mapStateToProps = (state) => {
   const channelMessages = Object.values(state.messages).filter(el => el.channelId === state.currentChannelId);

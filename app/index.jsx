@@ -22,7 +22,17 @@ store.dispatch(actions.initMessagesState(messages));
 store.dispatch(actions.initChannelsState(channels));
 store.dispatch(actions.initCurrentChannelState(currentChannelId));
 
+// const actionTypes = {
+//   connect: () => console.log('connected to server'),
+//   disconnect: () => console.log('disconnected from server'),
+//   newMessage: data => store.dispatch(actions.addMessage(data)),
+//   newChannel: data => store.dispatch(actions.addChannel(data)),
+//   removeChannel: data => store.dispatch(actions.removeChannel(data)),
+//   renameChannel: data => store.dispatch(actions.renameChannel(data)),
+// };
+
 const socket = io();
+
 socket
   .on('connect', () => console.log('connected to server'))
   .on('disconnect', () => console.log('disconnected from server'))
