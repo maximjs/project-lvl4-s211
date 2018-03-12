@@ -28,10 +28,31 @@ const сhannelCreatingState = handleActions({
   },
 }, 'none');
 
-const messages = handleActions({
-  [actions.initMessagesState](state, { payload: messagesState }) {
-    return _.keyBy(messagesState, 'id');
+const сhannelRemovingState = handleActions({
+  [actions.removeChannelRequest]() {
+    return 'requested';
   },
+  [actions.removeChannelSuccess]() {
+    return 'successed';
+  },
+  [actions.removeChannelFailure]() {
+    return 'failed';
+  },
+}, 'none');
+
+const сhannelRenamingState = handleActions({
+  [actions.renameChannelRequest]() {
+    return 'requested';
+  },
+  [actions.renameChannelSuccess]() {
+    return 'successed';
+  },
+  [actions.renameChannelFailure]() {
+    return 'failed';
+  },
+}, 'none');
+
+const messages = handleActions({
   [actions.addMessage](state, { payload: { data: { attributes } } }) {
     return { ...state, [attributes.id]: attributes };
   },
@@ -41,9 +62,6 @@ const messages = handleActions({
 }, {});
 
 const channels = handleActions({
-  [actions.initChannelsState](state, { payload: channelsState }) {
-    return _.keyBy(channelsState, 'id');
-  },
   [actions.addChannel](state, { payload: { data: { attributes } } }) {
     return { ...state, [attributes.id]: attributes };
   },
@@ -57,22 +75,63 @@ const channels = handleActions({
 }, {});
 
 const currentChannelId = handleActions({
-  [actions.initCurrentChannelState](state, { payload: channelId }) {
-    return channelId;
-  },
   [actions.changeCurrentChannel](state, { payload: { channelId } }) {
     return channelId;
   },
-  [actions.removeChannel]() {
-    return 1;
+  [actions.showModalRemove](state, { payload: { channelId } }) {
+    return channelId;
+  },
+  [actions.showModalRename](state, { payload: { channelId } }) {
+    return channelId;
+  },
+  [actions.removeChannel](state, { payload: { generalChannelId } }) {
+    return generalChannelId;
   },
 }, null);
+
+const isShowModalRemove = handleActions({
+  [actions.showModalRemove]() {
+    return true;
+  },
+  [actions.hideModalRemove]() {
+    return false;
+  },
+  [actions.removeChannel]() {
+    return false;
+  },
+}, false);
+
+const isShowModalRename = handleActions({
+  [actions.showModalRename]() {
+    return true;
+  },
+  [actions.hideModalRename]() {
+    return false;
+  },
+  [actions.renameChannel]() {
+    return false;
+  },
+}, false);
+
+const isShowAddChannelForm = handleActions({
+  [actions.switchShowAddChannelForm](state) {
+    return !state;
+  },
+  [actions.addChannel](state) {
+    return !state;
+  },
+}, false);
 
 export default combineReducers({
   messageCreatingState,
   сhannelCreatingState,
+  сhannelRemovingState,
+  сhannelRenamingState,
   form: formReducer,
   messages,
   channels,
   currentChannelId,
+  isShowModalRemove,
+  isShowModalRename,
+  isShowAddChannelForm,
 });

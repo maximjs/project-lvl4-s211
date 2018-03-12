@@ -2,8 +2,9 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const RemoveChannelModal = props =>
-  (
+const RemoveChannelModal = (props) => {
+  const disabled = props.сhannelRemovingState === 'requested';
+  return (
     <Modal backdrop={false} show={props.show}>
       <Modal.Header>
         <Modal.Title>
@@ -16,12 +17,13 @@ const RemoveChannelModal = props =>
           : 'You can`t remove this channel'}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.handleCloseModalRemove} bsStyle="primary">Close</Button>
+        <Button onClick={props.hideModalRemove} bsStyle="primary">Close</Button>
         {props.removable
-          ? <Button onClick={props.handleRemoveChannel} bsStyle="success">Remove</Button>
+          ? <Button disabled={disabled} onClick={props.handleRemoveChannel} bsStyle="success">Remove</Button>
           : null}
       </Modal.Footer>
     </Modal>
   );
+};
 
 export default RemoveChannelModal;

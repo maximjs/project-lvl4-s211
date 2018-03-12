@@ -5,11 +5,12 @@ import { Modal, Button } from 'react-bootstrap';
 
 class RenameChannelModal extends React.Component {
   renameChannel = (values) => {
-    this.props.requestRenameChannel(this.props.currentChannelId, { name: values.text });
+    this.props.sendRenameChannel(this.props.currentChannelId, { name: values.text });
     this.props.reset();
   };
 
   render() {
+    const disabled = this.props.сhannelRenamingState === 'requested';
     return (
       <Modal backdrop={false} show={this.props.show}>
         <Modal.Header>
@@ -22,8 +23,8 @@ class RenameChannelModal extends React.Component {
             <Field name="text" required component="input" type="text" className="form-control" placeholder="channel name" />
           </div>
           <Modal.Footer>
-            <Button onClick={this.props.handleCloseModalRename} bsStyle="primary">Close</Button>
-            <Button onClick={this.props.handleCloseModalRename} type="submit" bsStyle="success">Rename</Button>
+            <Button onClick={this.props.hideModalRename} bsStyle="primary">Close</Button>
+            <Button disabled={disabled} type="submit" bsStyle="success">Rename</Button>
           </Modal.Footer>
         </form>
       </Modal>

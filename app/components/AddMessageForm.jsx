@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 
 class AddMessageForm extends React.Component {
   updateMessage = (values) => {
-    this.props.updateMessage(
+    this.props.sendUpdateMessages(
       this.props.currentChannelId,
       { text: values.text, userName: this.props.userName },
     );
@@ -18,7 +18,7 @@ class AddMessageForm extends React.Component {
         <div className="input-group mb-3">
           <Field name="text" required component="input" type="text" className="form-control" placeholder="write a message" />
           <div className="input-group-append">
-            <button className="btn btn-outline-primary" disabled={disabled} type="submit">Send</button>
+            <input className="form-control btn btn-outline-primary" value="Send" disabled={disabled} type="submit" />
           </div>
         </div>
       </form>

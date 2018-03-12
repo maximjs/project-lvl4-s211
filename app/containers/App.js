@@ -7,6 +7,7 @@ const mapStateToProps = (state) => {
     currentChannelId: state.currentChannelId,
     messageCreatingState: state.messageCreatingState,
     сhannelCreatingState: state.сhannelCreatingState,
+    isShowAddChannelForm: state.isShowAddChannelForm,
   };
   return props;
 };

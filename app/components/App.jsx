@@ -11,7 +11,9 @@ const App = props =>
         <h4>Channels:</h4>
         <AddChannelForm
           сhannelCreatingState={props.сhannelCreatingState}
-          updateChannels={props.updateChannels}
+          sendUpdateChannels={props.sendUpdateChannels}
+          isShowAddChannelForm={props.isShowAddChannelForm}
+          switchShowAddChannelForm={props.switchShowAddChannelForm}
         />
         <br />
         <Channels />
@@ -25,7 +27,7 @@ const App = props =>
           userName={props.userName}
           currentChannelId={props.currentChannelId}
           messageCreatingState={props.messageCreatingState}
-          updateMessage={props.updateMessage}
+          sendUpdateMessages={props.sendUpdateMessages}
         />
       </div>
     </div>

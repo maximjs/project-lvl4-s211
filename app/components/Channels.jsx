@@ -5,27 +5,12 @@ import RemoveChannelModal from './RemoveChannelModal';
 import RenameChannelModal from './RenameChannelModal';
 
 class Channels extends React.Component {
-  state = {
-    showModalRemove: false,
-    showModalRename: false,
-  };
-
   handleShowModalRemove = id => () => {
-    this.props.changeCurrentChannel({ channelId: id });
-    this.setState({ showModalRemove: true });
+    this.props.showModalRemove({ channelId: id });
   };
 
   handleShowModalRename = id => () => {
-    this.props.changeCurrentChannel({ channelId: id });
-    this.setState({ showModalRename: true });
-  };
-
-  handleCloseModalRemove = () => {
-    this.setState({ showModalRemove: false });
-  };
-
-  handleCloseModalRename = () => {
-    this.setState({ showModalRename: false });
+    this.props.showModalRename({ channelId: id });
   };
 
   handleChannelClick = id => () => {
@@ -33,21 +18,18 @@ class Channels extends React.Component {
   };
 
   handleRemoveChannel = () => {
-    this.props.requestRemoveChannel(this.props.currentChannelId);
-    this.setState({ showModalRemove: false });
+    this.props.sendRemoveChannel(this.props.currentChannelId);
   };
 
   channelsRender() {
     const { channels } = this.props;
     return channels.map((channel) => {
-      const name = this.props.currentChannelId !== channel.id ? 'btn-light' : 'btn-primary';
       const btnClass = classnames({
         btn: true,
-        [name]: true,
+        'btn-light': this.props.currentChannelId !== channel.id,
+        'btn-primary': this.props.currentChannelId === channel.id,
       });
-      const btnDropdownClass = classnames({
-        btn: true,
-        [name]: true,
+      const btnDropdownClass = classnames(btnClass, {
         'dropdown-toggle': true,
         'dropdown-toggle-split': true,
       });
@@ -67,24 +49,24 @@ class Channels extends React.Component {
   }
 
   render() {
-    const { channels, currentChannelId } = this.props;
-    const { removable } = channels.find(channel => channel.id === currentChannelId);
     return (
       <div>
         <div className="btn-group-vertical">
           {this.channelsRender()}
         </div>
         <RemoveChannelModal
-          show={this.state.showModalRemove}
-          handleCloseModalRemove={this.handleCloseModalRemove}
-          removable={removable}
+          show={this.props.isShowModalRemove}
+          hideModalRemove={this.props.hideModalRemove}
+          removable={this.props.currentChannelRemovable}
           handleRemoveChannel={this.handleRemoveChannel}
+          сhannelRemovingState={this.props.сhannelRemovingState}
         />
         <RenameChannelModal
-          show={this.state.showModalRename}
-          handleCloseModalRename={this.handleCloseModalRename}
-          requestRenameChannel={this.props.requestRenameChannel}
+          show={this.props.isShowModalRename}
+          hideModalRename={this.props.hideModalRename}
+          sendRenameChannel={this.props.sendRenameChannel}
           currentChannelId={this.props.currentChannelId}
+          сhannelRenamingState={this.props.сhannelRenamingState}
         />
       </div>
     );
