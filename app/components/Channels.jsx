@@ -5,12 +5,36 @@ import RemoveChannelModal from './RemoveChannelModal';
 import RenameChannelModal from './RenameChannelModal';
 
 class Channels extends React.Component {
+  state = {
+    showModalRemove: false,
+    showModalRename: false,
+  };
+
+  handleShowModalRemove = id => () => {
+    this.props.changeCurrentChannel({ channelId: id });
+    this.setState({ showModalRemove: true });
+  };
+
+  handleShowModalRename = id => () => {
+    this.props.changeCurrentChannel({ channelId: id });
+    this.setState({ showModalRename: true });
+  };
+
+  handleCloseModalRemove = () => {
+    this.setState({ showModalRemove: false });
+  };
+
+  handleCloseModalRename = () => {
+    this.setState({ showModalRename: false });
+  };
+
   handleChannelClick = id => () => {
     this.props.changeCurrentChannel({ channelId: id });
   };
 
   handleRemoveChannel = () => {
     this.props.requestRemoveChannel(this.props.currentChannelId);
+    this.setState({ showModalRemove: false });
   };
 
   channelsRender() {
@@ -34,8 +58,8 @@ class Channels extends React.Component {
             <span className="sr-only" />
           </button>
           <div className="dropdown-menu">
-            <button type="button" onClick={this.handleChannelClick(channel.id)} className="btn dropdown-item" data-toggle="modal" data-target="#removeChannelModal">Remove</button>
-            <button type="button" onClick={this.handleChannelClick(channel.id)} className="btn dropdown-item" data-toggle="modal" data-target="#renameChannelModal">Rename</button>
+            <button type="button" onClick={this.handleShowModalRemove(channel.id)} className="btn dropdown-item">Remove</button>
+            <button type="button" onClick={this.handleShowModalRename(channel.id)} className="btn dropdown-item">Rename</button>
           </div>
         </div>
       );
@@ -50,8 +74,18 @@ class Channels extends React.Component {
         <div className="btn-group-vertical">
           {this.channelsRender()}
         </div>
-        <RemoveChannelModal removable={removable} handleRemoveChannel={this.handleRemoveChannel} />
-        <RenameChannelModal requestRenameChannel={this.props.requestRenameChannel} currentChannelId={this.props.currentChannelId} />
+        <RemoveChannelModal
+          show={this.state.showModalRemove}
+          handleCloseModalRemove={this.handleCloseModalRemove}
+          removable={removable}
+          handleRemoveChannel={this.handleRemoveChannel}
+        />
+        <RenameChannelModal
+          show={this.state.showModalRename}
+          handleCloseModalRename={this.handleCloseModalRename}
+          requestRenameChannel={this.props.requestRenameChannel}
+          currentChannelId={this.props.currentChannelId}
+        />
       </div>
     );
   }
