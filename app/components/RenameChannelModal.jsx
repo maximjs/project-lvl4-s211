@@ -12,7 +12,7 @@ class RenameChannelModal extends React.Component {
   render() {
     const disabled = this.props.сhannelRenamingState === 'requested';
     return (
-      <Modal backdrop={false} show={this.props.show}>
+      <Modal backdrop={false} show={this.props.showModalType === 'renamingChannelModal'}>
         <Modal.Header>
           <Modal.Title>
             Renaming channel
@@ -23,7 +23,7 @@ class RenameChannelModal extends React.Component {
             <Field name="text" required component="input" type="text" className="form-control" placeholder="channel name" />
           </div>
           <Modal.Footer>
-            <Button onClick={this.props.hideModalRename} bsStyle="primary">Close</Button>
+            <Button onClick={this.props.hideModal} bsStyle="primary">Close</Button>
             <Button disabled={disabled} type="submit" bsStyle="success">Rename</Button>
           </Modal.Footer>
         </form>

@@ -78,10 +78,7 @@ const currentChannelId = handleActions({
   [actions.changeCurrentChannel](state, { payload: { channelId } }) {
     return channelId;
   },
-  [actions.showModalRemove](state, { payload: { channelId } }) {
-    return channelId;
-  },
-  [actions.showModalRename](state, { payload: { channelId } }) {
+  [actions.showModal](state, { payload: { channelId } }) {
     return channelId;
   },
   [actions.removeChannel](state, { payload: { generalChannelId } }) {
@@ -89,29 +86,20 @@ const currentChannelId = handleActions({
   },
 }, null);
 
-const isShowModalRemove = handleActions({
-  [actions.showModalRemove]() {
-    return true;
+const showModalType = handleActions({
+  [actions.showModal](state, { payload: { modalType } }) {
+    return modalType;
   },
-  [actions.hideModalRemove]() {
-    return false;
-  },
-  [actions.removeChannel]() {
-    return false;
-  },
-}, false);
-
-const isShowModalRename = handleActions({
-  [actions.showModalRename]() {
-    return true;
-  },
-  [actions.hideModalRename]() {
-    return false;
+  [actions.hideModal]() {
+    return 'none';
   },
   [actions.renameChannel]() {
-    return false;
+    return 'none';
   },
-}, false);
+  [actions.removeChannel]() {
+    return 'none';
+  },
+}, 'none');
 
 const isShowAddChannelForm = handleActions({
   [actions.switchShowAddChannelForm](state) {
@@ -131,7 +119,6 @@ export default combineReducers({
   messages,
   channels,
   currentChannelId,
-  isShowModalRemove,
-  isShowModalRename,
+  showModalType,
   isShowAddChannelForm,
 });

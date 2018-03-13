@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 const RemoveChannelModal = (props) => {
   const disabled = props.сhannelRemovingState === 'requested';
   return (
-    <Modal backdrop={false} show={props.show}>
+    <Modal backdrop={false} show={props.showModalType === 'removingChannelModal'}>
       <Modal.Header>
         <Modal.Title>
           Removing channel
@@ -17,7 +17,7 @@ const RemoveChannelModal = (props) => {
           : 'You can`t remove this channel'}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.hideModalRemove} bsStyle="primary">Close</Button>
+        <Button onClick={props.hideModal} bsStyle="primary">Close</Button>
         {props.removable
           ? <Button disabled={disabled} onClick={props.handleRemoveChannel} bsStyle="success">Remove</Button>
           : null}

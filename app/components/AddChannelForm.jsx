@@ -30,7 +30,7 @@ class AddChannelForm extends React.Component {
   }
 
   render() {
-    const buttonText = this.props.isShowAddChannelForm === true ? 'Chancel' : 'Add channel';
+    const buttonText = this.props.isShowAddChannelForm ? 'Chancel' : 'Add channel';
     return (
       <div>
         <button type="button" onClick={this.handleClick} className="btn btn-primary btn-sm">{buttonText}</button>

@@ -5,10 +5,9 @@ import Component from '../components/Channels';
 const mapStateToProps = (state) => {
   const props = {
     currentChannelId: state.currentChannelId,
-    currentChannelRemovable: state.channels[state.currentChannelId].removable,
+    currentChannel: state.channels[state.currentChannelId],
     channels: Object.values(state.channels),
-    isShowModalRemove: state.isShowModalRemove,
-    isShowModalRename: state.isShowModalRename,
+    showModalType: state.showModalType,
     сhannelRemovingState: state.сhannelRemovingState,
     сhannelRenamingState: state.сhannelRenamingState,
   };

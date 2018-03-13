@@ -25,10 +25,8 @@ export const removeChannel = createAction('CHANNEL_REMOVE');
 export const renameChannel = createAction('CHANNEL_RENAME');
 export const changeCurrentChannel = createAction('CHANNEL_CHANGE');
 
-export const showModalRemove = createAction('MODAL_REMOVE_SHOW');
-export const hideModalRemove = createAction('MODAL_REMOVE_HIDE');
-export const showModalRename = createAction('MODAL_RENAME_SHOW');
-export const hideModalRename = createAction('MODAL_RENAME_HIDE');
+export const showModal = createAction('MODAL_SHOW');
+export const hideModal = createAction('MODAL_HIDE');
 
 export const switchShowAddChannelForm = createAction('ADD_CHANNEL_FORM_SWITCH_SHOW');
 

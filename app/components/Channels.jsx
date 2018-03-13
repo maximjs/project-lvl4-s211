@@ -6,11 +6,11 @@ import RenameChannelModal from './RenameChannelModal';
 
 class Channels extends React.Component {
   handleShowModalRemove = id => () => {
-    this.props.showModalRemove({ channelId: id });
+    this.props.showModal({ channelId: id, modalType: 'removingChannelModal' });
   };
 
   handleShowModalRename = id => () => {
-    this.props.showModalRename({ channelId: id });
+    this.props.showModal({ channelId: id, modalType: 'renamingChannelModal' });
   };
 
   handleChannelClick = id => () => {
@@ -55,15 +55,15 @@ class Channels extends React.Component {
           {this.channelsRender()}
         </div>
         <RemoveChannelModal
-          show={this.props.isShowModalRemove}
-          hideModalRemove={this.props.hideModalRemove}
-          removable={this.props.currentChannelRemovable}
+          showModalType={this.props.showModalType}
+          hideModal={this.props.hideModal}
+          removable={this.props.currentChannel.removable}
           handleRemoveChannel={this.handleRemoveChannel}
           сhannelRemovingState={this.props.сhannelRemovingState}
         />
         <RenameChannelModal
-          show={this.props.isShowModalRename}
-          hideModalRename={this.props.hideModalRename}
+          showModalType={this.props.showModalType}
+          hideModal={this.props.hideModal}
           sendRenameChannel={this.props.sendRenameChannel}
           currentChannelId={this.props.currentChannelId}
           сhannelRenamingState={this.props.сhannelRenamingState}
