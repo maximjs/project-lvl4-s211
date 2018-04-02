@@ -16,4 +16,4 @@
 * Деплой (Heroku)
 
 Realtime chat:  
-https://fast-plains-19351.herokuapp.com
+https://fast-plains-19351.herokuapp.com (подождите 20-40 сек, пока стартует dyno)
